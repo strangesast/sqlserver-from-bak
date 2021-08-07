@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_NAME: example
+      DATABASE_FILE: example.bak
+    ports:
+      - 1434:1433
+    volumes:
+      - ./data:/data
+      - sql:/var/opt/mssql
+volumes:
+  sql:
