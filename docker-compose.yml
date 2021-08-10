@@ -8,7 +8,7 @@ services:
       DATABASE_NAME: example
       DATABASE_FILE: example.bak
     ports:
-      - 1434:1433
+      - 1433:1433
     volumes:
       - ./data:/data
       - sql:/var/opt/mssql
