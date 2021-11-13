@@ -3,14 +3,22 @@ services:
   db:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/db/Dockerfile
     environment:
-      DATABASE_NAME: example
-      DATABASE_FILE: example.bak
+      - "MSSQL_SA_PASSWORD=Password--"
     ports:
       - 1433:1433
     volumes:
+      - "sql:/var/opt/mssql:rw"
       - ./data:/data
-      - sql:/var/opt/mssql
+  init:
+    network_mode: host
+    build:
+      context: .
+      dockerfile: docker/init/Dockerfile
+    environment:
+      - "MSSQL_SA_PASSWORD=Password--"
+      - "DATABASE_NAME=example"
+      - "DATABASE_FILE=example.bak"
 volumes:
   sql:
