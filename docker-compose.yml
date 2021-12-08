@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: docker/db/Dockerfile
     environment:
-      - "MSSQL_SA_PASSWORD=Password--"
+      MSSQL_SA_PASSWORD: "${SA_PASSWORD:?password}"
     ports:
       - 1433:1433
     volumes:
@@ -17,8 +17,8 @@ services:
       context: .
       dockerfile: docker/init/Dockerfile
     environment:
-      - "MSSQL_SA_PASSWORD=Password--"
-      - "DATABASE_NAME=example"
-      - "DATABASE_FILE=example.bak"
+      MSSQL_SA_PASSWORD: "${SA_PASSWORD:?password}"
+      DATABASE_NAME: "${DATABASE_NAME:?dbname}"
+      DATABASE_FILE: "${DATABASE_FILE:?dbfile}"
 volumes:
   sql:
